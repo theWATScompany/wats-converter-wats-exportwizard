@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net472;net8.0-windows</TargetFrameworks>
+    <RootNamespace>Virinco.WATS.Converter.WATS.ExportWizard</RootNamespace>
+    <AssemblyName>Virinco.WATS.Converter.WATS.ExportWizard</AssemblyName>
+    <OutputType>Library</OutputType>
+    <LangVersion>latest</LangVersion>
+    <Version>1.0.0</Version>
+    <Company>The WATS Company AS</Company>
+    <Product>WATS Export Wizard Converter</Product>
+    <Description>Imports UUT reports in the WATS Export Wizard layout: tab-separated (TSV) as exported, or comma/semicolon-separated (CSV).</Description>
+    <Copyright>Copyright Â© 2026 The WATS Company AS</Copyright>
+  </PropertyGroup>
+
+  <!-- Tests live in ConverterTests.csproj; keep them out of the converter assembly. -->
+  <ItemGroup>
+    <Compile Remove="ConverterTests.cs;OmittedFieldsTests.cs" />
+  </ItemGroup>
+
+  <!-- WATS Client 6 (.NET Framework 4.7.2) -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="WATS.Client" Version="6.1.134">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- WATS Client 7 (.NET 8) -->
+  <ItemGroup Condition="'$(TargetFramework)' != 'net472'">
+    <PackageReference Include="Virinco.WATS.ClientAPI" Version="7.*" />
+  </ItemGroup>
+</Project>
+
